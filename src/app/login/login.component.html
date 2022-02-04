@@ -1,37 +1,48 @@
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
-  </style> 
-<form (ngSubmit)="login()"> 
- 
-<div class="" style="border-radius:25px;">
-  <div class="container" style="width: 415px;margin-top:90px;height: 390px;">
+</style>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <div class="" style="border-radius:25px;">
+    <div class="container" style="width: 415px;margin-top:90px;height: 390px;">
 
 
-    <h2 style="font-family: 'Exo 2', sans-serif; color:rgba(0, 0, 0, 0.877);font-weight: bold; font-weight: bold; text-align: center;"
-      class="p-3 fs-3">LOGIN</h2>
+      <h2
+        style="font-family: 'Exo 2', sans-serif; color:rgba(0, 0, 0, 0.877);font-weight: bold; font-weight: bold; text-align: center;"
+        class="p-3 fs-3">LOGIN</h2>
 
 
-    <div class="mb-3 p-1" >
-      <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-      <input type="email" id="accno" class="form-control" name="acno" [(ngModel)]="acno" [value]="accno" aria-describedby="emailHelp "
-        placeholder="account number" (change)="acnoChange($event)" style=" border-style: solid; border-color: coral;">
+      <div class="mb-3 p-1">
+        <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
+        <input type="email" id="accno" class="form-control" name="acno" formControlName="acno" 
+          aria-describedby="emailHelp " placeholder="account number" 
+          style=" border-style: solid; border-color: coral;">
+
+        <div style="color: red;"
+          *ngIf="(this.loginForm.get('acno')?.touched || this.loginForm.get('acno')?.dirty) && this.loginForm.get('acno')?.errors"
+          id="errors">Invalid Account Number</div>
+      </div>
+
+      <div class="mb-3 p-1">
+        <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
+        <input type="password" id="pwd1" class="form-control" name="pswd" formControlName="pswd" placeholder="password"
+           style=" border-style: solid; border-color: coral;">
+
+        <div style="color: red;"
+          *ngIf="(this.loginForm.get('pswd')?.touched || this.loginForm.get('pswd')?.dirty) && this.loginForm.get('pswd')?.errors"
+          id="errors">Invalid Password</div>
+
+      </div>
+      <div>
+        <p style="color: black; align-items: baseline;">Not a user<a routerLink="register">Register</a></p>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto p-2">
+        <button type="submit" class="btn btn-success" value="login"
+          style="color:white;font-weight: bold ;">Login</button>
+      </div>
+
 
     </div>
-
-    <div class="mb-3 p-1">
-      <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
-      <input type="password" id="pwd1" class="form-control" name="pswd" [(ngModel)]="pswd" placeholder="password" (change)="pswdChange($event)"  style=" border-style: solid; border-color: coral;">
-    </div>
-    <div>
-      <p style="color: black; align-items: baseline;">Not a user<a routerLink="register">Register</a></p>
-    </div>
-    <div class="d-grid gap-2 col-6 mx-auto p-2" >
-      <button type="submit" class="btn btn-success"  value="login"
-        style="color:white;font-weight: bold ;">Login</button>
-
-    </div>
-    
-
   </div>
-</div>
 </form>

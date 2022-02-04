@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -9,49 +10,78 @@ import { DataService } from '../services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  aim = "Your banking perfect partner"
+  aim = "Your perfect banking partner"
 
 
   accno = "Account Number Please"
   acno = ""
   pswd = ""
 
+loginForm = this.fb.group({
 
+  acno: ['',[Validators.required, Validators.pattern('[0-9]*')]],
+  pswd: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9]*')]]
 
-  constructor(private routerLogin:Router,private ds:DataService) { }
+  })
+
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
-  acnoChange(event: any) {
-    this.acno = event.target.value
-    console.log(this.acno)
+  // acnoChange(event: any) {
+  //   this.acno = event.target.value
+  //   console.log(this.acno)
 
-  }
+  // }
 
-  pswdChange(event: any) {
-    this.pswd = event.target.value
-    console.log(this.pswd)
+  // pswdChange(event: any) {
+  //   this.pswd = event.target.value
+  //   console.log(this.pswd)
 
-  }
+  // }
 
 
   login() {
 
-  
-    // console.log(p);
-    
-    var acno = this.acno
-    var pswd = this.pswd
-    let result = this.ds.login(acno,pswd)
 
-if(result){
 
-alert("Login success")
-this.routerLogin.navigateByUrl('dashboard')
+    var acno = this.loginForm.value.acno
+    var pswd = this.loginForm.value.pswd
 
+    // console.log(this.loginForm)
+    if(this.loginForm.valid){
+//asynchronous event
+
+      this.ds.login(acno,pswd)
+      .subscribe((result: any) => {
+        if (result) {
+
+          alert(result.message)
+          localStorage.setItem("currentUser",JSON.stringify(result.currentUser))
+          localStorage.setItem("currentAcno",JSON.stringify(result.currentAcno))
+          localStorage.setItem("token",JSON.stringify(result.token))
+          this.router.navigateByUrl('dashboard')
+        }
+      },
+        (result: any)=>{
+        alert(result.error.message)
+ }
+)
+}
+
+else{
+  alert("Form Invalid")
 }
   }
 
+
+
+
+}
+
+// function Subscribe(arg0: (result: any) => void, arg1: (result: any) => void) {
+//   throw new Error('Function not implemented.');
+// }
   //    if(acno in db){
   //      if(pswd==db[acno]["password"]){
   //        alert("Login Successful")
@@ -92,6 +122,3 @@ this.routerLogin.navigateByUrl('dashboard')
   //       alert("Faild")
        
   //    }
-
-  
-  }

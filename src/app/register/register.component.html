@@ -1,45 +1,58 @@
-
 <!-- <p>login works!</p> -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
-  </style> 
-<form (ngSubmit)="register()">
-<div class="" style="border-radius:25px;">
-  <div class="two" style="width: 415px;margin-top:90px;height: 430px;">
+</style>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <div class="" style="border-radius:25px;">
+    <div class=" two" style="width: 415px;margin-top:90px;height: 430px;">
 
 
-    <h2 style="font-family: 'Exo 2', sans-serif;  color:rgb(0, 0, 0);font-weight: bold; font-weight: bold; text-align: center;"
-      class="p-3 fs-3">CREATE ACCOUNT</h2>
+      <h2
+        style="font-family: 'Exo 2', sans-serif;  color:rgb(0, 0, 0);font-weight: bold; font-weight: bold; text-align: center;"
+        class="p-3 fs-3">CREATE ACCOUNT</h2>
 
 
-    <div class="mb-3 p-1">
-      <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-      <input type="email" id="uname" class="form-control" name="uname" [(ngModel)]="uname"  aria-describedby="emailHelp "
-        placeholder="Enter the Username" >
+      <div class="mb-3 p-1">
 
-    </div>
+        <input type="email" id="uname" class="form-control" name="uname" formControlName="uname"
+          aria-describedby="emailHelp " placeholder="Enter the Username">
 
-    <div class="mb-3 p-1">
-        <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-        <input type="email" id="accno1" class="form-control" name="acno" [(ngModel)]="acno"  aria-describedby="emailHelp "
-          placeholder="account number" >
-  
+        <div style="color: red;"
+          *ngIf="(this.registerForm.get('uname')?.touched || this.registerForm.get('uname')?.dirty) && this.registerForm.get('uname')?.errors"
+          id="errors">Invalid Username</div>
+
       </div>
 
-    <div class="mb-3 p-1">
-      <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
-      <input type="password" id="pwd2" class="form-control" name="pswd" [(ngModel)]="pswd" placeholder="password" >
-    </div>
-    <!-- <div>
+      <div class="mb-3 p-1">
+        <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
+        <input type="email" id="accn" class="form-control" name="acno" formControlName="acno"
+          aria-describedby="emailHelp " placeholder="account number">
+
+        <div style="color: red;"
+          *ngIf="(this.registerForm.get('acno')?.touched || this.registerForm.get('acno')?.dirty) && this.registerForm.get('acno')?.errors"
+          id="errors">Invalid Account Number</div>
+
+      </div>
+
+      <div class="mb-3 p-1">
+        <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
+        <input type="password" id="pwd" class="form-control" name="pswd" formControlName="pswd" placeholder="password">
+
+        <div style="color: red;"
+          *ngIf="(this.registerForm.get('pswd')?.touched || this.registerForm.get('pswd')?.dirty) && this.registerForm.get('pswd')?.errors"
+          id="errors">Invalid Password</div>
+
+
+      </div>
+      <!-- <div>
       <p style="color: black; align-items: baseline;">Not a user<a routerLink="register">Register</a></p>
     </div> -->
-    <div class="d-grid gap-2 col-6 mx-auto p-2" >
-      <button type="submit" class="btn btn-outline-danger"  value="register"
-        style="color:rgba(0, 0, 0, 0.808);font-weight: bold ;">Register</button>
+      <div class="d-grid gap-2 col-6 mx-auto p-2">
+        <button type="submit" class="btn btn-outline-danger" value="register"
+          style="color:rgba(0, 0, 0, 0.808);font-weight: bold ;">Register</button>
+          
 
+      </div>
     </div>
-    
-
   </div>
-</div>
 </form>

@@ -1,46 +1,74 @@
-<!-- <p>dashboard works!</p> -->
 
+<!-- <p>dashboard works!</p> -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
+  </style> 
 <!-- <p>login works!</p> -->
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
-    </style> 
-  <form (ngSubmit)="deposit()"> 
-  <div class="" style="border-radius:25px;">
-    <div class="c1" style="width: 715px;margin-top:90px;height: 430px;">
+
+<h1 style="color: rgba(0, 0, 0, 0.836); font-family:'Exo 2', sans-serif;">Welcome {{user}}</h1>
+
+
+<p style="color: rgb(0, 0, 0); font-family:'Exo 2', sans-serif;">Login date(unformatted):{{lDate}} </p>
+
+<p style="color: rgb(0, 0, 0); font-family:'Exo 2', sans-serif;">Login Date(using pipe):{{lDate | date | uppercase }} </p>
+
+<a style="font-family:'Exo 2', sans-serif;" routerLink="/transaction">View Transaction History</a>
+<button style="color:white; margin-left: 950px;margin-top: -200px; " class="btn btn-dark" (click)="onLogout()">Logout</button>
+
+<div>
+
+
+  <form [formGroup]="depositForm" (ngSubmit)="deposit()"> 
+ 
+  <div  [ngClass]="acno? 'b1':'' " class="" style="border-radius:25px;">
+    <div class="c1" >
   
   
-      <h2 style="font-family: 'Exo 2', sans-serif;  color:rgb(255, 255, 255);font-weight: bold; font-weight: bold; text-align: center;"
-        class="p-3 fs-3">Credit Transaction</h2>
+      <h2 appHighlight style="font-family: 'Exo 2', sans-serif;  color:rgb(0, 0, 0);font-weight: bold; font-weight: bold; text-align: center;"
+        class="p-3 fs-3">Deposit</h2>
   
   
    
   
       <div class="mb-3 p-1">
           <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-          <input type="email" id="accno2" class="form-control" name="acno" [(ngModel)]="acno"  aria-describedby="emailHelp "
+          <input type="email" id="accno" class="form-control" name="acno" formControlName="acno"  aria-describedby="emailHelp "
             placeholder="Account Number" >
     
+            <div style="color: red;"
+            *ngIf="(this.depositForm.get('acno')?.touched || this.depositForm.get('acno')?.dirty) && this.depositForm.get('acno')?.errors"
+            id="errors">Invalid Account Number</div>
+  
         </div>
   
       <div class="mb-3 p-1">
         <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
-        <input type="password" id="pswd" class="form-control" name="pswd" [(ngModel)]="pswd" placeholder="password" >
+        <input type="password" id="pswd" class="form-control" name="pswd" formControlName="pswd" placeholder="password" >
+      
+        <div style="color: red;"
+        *ngIf="(this.depositForm.get('pswd')?.touched || this.depositForm.get('pswd')?.dirty) && this.depositForm.get('pswd')?.errors"
+        id="errors">Invalid Password</div>
+      
       </div>
 
 
       <div class="mb-3 p-1">
         <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-        <input type="email" id="amount" class="form-control" name="amount" [(ngModel)]="amount"  aria-describedby="emailHelp "
+        <input type="email" id="amount" class="form-control" name="amount" formControlName="amount"  aria-describedby="emailHelp "
           placeholder="Enter the Amount" >
   
+          <div style="color: red;"
+          *ngIf="(this.depositForm.get('amount')?.touched || this.depositForm.get('amount')?.dirty) && this.depositForm.get('amount')?.errors"
+          id="errors">Invalid</div>
+
       </div>
       <!-- <div>
         <p style="color: black; align-items: baseline;">Not a user<a routerLink="register">Register</a></p>
       </div> -->
       <div class="d-grid gap-2 col-6 mx-auto p-2" >
         <button type="submit" class="btn btn-outline-warning"  value="deposit"
-          style="color:rgba(255, 255, 255, 0.808);font-weight: bold ;">Deposit</button>
+          style="color:rgba(0, 0, 0, 0.808);font-weight: bold ;">Proceed</button>
   
       </div>
       
@@ -48,7 +76,6 @@
     </div>
   </div>
   </form>
-
 
 
   <!-- <p>dashboard works!</p> -->
@@ -57,47 +84,68 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
     </style> 
-  <form (ngSubmit)="deposit()"> 
-  <div class="" style="border-radius:25px;">
-    <div class="c1" style="width: 715px;margin-top:90px;height: 430px; margin-bottom: 200px;">
+  <form  [formGroup]="withdrawForm" (ngSubmit)="withdraw()"> 
+  <div  [ngClass]="acno? 'b1':'' " class="" style="border-radius:25px;">
+    <div class="c2">
   
   
-      <h2 style="font-family: 'Exo 2', sans-serif;  color:rgb(255, 255, 255);font-weight: bold; font-weight: bold; text-align: center;"
-        class="p-3 fs-3">Debit Transaction</h2>
+      <h2 appHighlight style="font-family: 'Exo 2', sans-serif;  color:rgb(0, 0, 0);font-weight: bold; font-weight: bold; text-align: center;"
+        class="p-3 fs-3">Withdraw</h2>
   
   
    
   
       <div class="mb-3 p-1">
           <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-          <input type="email" id="accno2" class="form-control" name="acno" [(ngModel)]="acno"  aria-describedby="emailHelp "
+          <input type="email" id="accno2" class="form-control" name="acno" formControlName="acno"  aria-describedby="emailHelp "
             placeholder="Account Number" >
     
+            <div style="color: red;"
+            *ngIf="(this.withdrawForm.get('acno')?.touched || this.withdrawForm.get('acno')?.dirty) && this.withdrawForm.get('acno')?.errors"
+            id="errors">Invalid Account Number</div>
+  
+
         </div>
   
       <div class="mb-3 p-1">
         <label for="exampleInputPassword1" class="form-label" style="margin-right: 307px;"></label>
-        <input type="password" id="pswd" class="form-control" name="pswd" [(ngModel)]="pswd" placeholder="password" >
+        <input type="password" id="pswd2" class="form-control" name="pswd" formControlName="pswd" placeholder="password" >
+      
+        <div style="color: red;"
+        *ngIf="(this.withdrawForm.get('pswd')?.touched || this.withdrawForm.get('pswd')?.dirty) && this.withdrawForm.get('pswd')?.errors"
+        id="errors">Invalid Password</div>
+
+      
       </div>
 
 
       <div class="mb-3 p-1">
         <label for="exampleInputEmail1" class="form-label" style="margin-right: 255px;"></label>
-        <input type="email" id="amount" class="form-control" name="amount" [(ngModel)]="amount"  aria-describedby="emailHelp "
+        <input type="email" id="amount1" class="form-control" name="amount" formControlName="amount"  aria-describedby="emailHelp "
           placeholder="Enter the Amount" >
   
+          <div style="color: red;"
+          *ngIf="(this.withdrawForm.get('amount')?.touched || this.withdrawForm.get('amount')?.dirty) && this.withdrawForm.get('amount')?.errors"
+          id="errors">Invalid</div>
+
       </div>
       <!-- <div>
         <p style="color: black; align-items: baseline;">Not a user<a routerLink="register">Register</a></p>
       </div> -->
       <div class="d-grid gap-2 col-6 mx-auto p-2" >
-        <button type="submit" class="btn btn-outline-warning"  value="deposit"
-          style="color:rgba(255, 255, 255, 0.808);font-weight: bold ;">Deposit</button>
+        <button type="submit" class="btn btn-outline-warning"  value="withdraw"
+          style="color:rgba(0, 0, 0, 0.808);font-weight: bold ;">Proceed</button>
   
       </div>
       
-  
+
     </div>
   </div>
   </form>
-  
+</div>
+
+<p style="margin-left: 400px; color: rgb(202, 63, 63);margin-top:17px;">
+<app-delete-confirmation (onCancel)="onCancel()" (onDelete)="onDelete($event)" [item]="acno"></app-delete-confirmation>
+
+<p>
+<button class="btn btn-danger" style=" margin-left: 670px; margin-top:-21px;" (click)="deleteFromParent()">Delete</button>

@@ -1,0 +1,9 @@
+.div1{
+    text-align: center;
+    border: rgb(0, 0, 0);
+    border-style: dashed;
+    padding: 10px;
+    margin-left:50px;
+    margin-right: 400px;
+    background-color: rgb(254, 255, 181);
+}

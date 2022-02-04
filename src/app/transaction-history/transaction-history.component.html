@@ -1,0 +1,24 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;1,100&family=Inconsolata:wght@300;500&display=swap');
+    </style> 
+    <h1 style="font-family: 'Exo 2', sans-serif;;">Transaction History</h1>
+
+    <table id="customers">
+
+<thead>
+            <tr>
+                <th style="text-align: center;">AMOUNT</th>
+                <th style="text-align: center;">TYPE</th>
+            </tr>
+        </thead> 
+<tbody>
+       <tr *ngFor="let t of transaction">
+
+                <td>{{t.amount}}</td>
+
+                <td>{{t.type}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<a routerLink="/dashboard">Home</a>

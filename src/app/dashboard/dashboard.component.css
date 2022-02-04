@@ -2,7 +2,27 @@
     border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px 18px rgb(0, 0, 0);
-    background-color: rgba(17, 1, 1, 0.63);
-    margin-left: 300px;
-   
+    background-color: rgba(0, 0, 0, 0.295);
+    margin-left: 400px;
+    width:300px;
+    height: 420px;
+    flex: 100%;
+
+}
+.c2{
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 18px rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.205);
+    margin-left:710px;
+width:300px;
+height: 420px;
+margin-top:-422px;
+flex: 100%;
+
+}
+
+.b1{
+    background-color: gray;
+    opacity: 0.2;
 }
